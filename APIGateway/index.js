@@ -5,17 +5,16 @@ const port = 3000;
 const {
   USERS_API_URL,
   PRODUCTS_API_URL,
-  DOG_API,
 } = require('./URLs');
+
+// O httpProxy vai trabalhar com proxy para pegar as requisições dos microserviços 
 
 const userServiceProxy = httpProxy(USERS_API_URL);
 const productsServiceProxy = httpProxy(PRODUCTS_API_URL);
-const dogServiceProxy = httpProxy(DOG_API);
 
-app.get('/', (req, res) => res.send('Hello Gateway API'));
+app.get('/', (req, res) => res.send('Gateway API raiz'));
 
-app.get('/users', (req, res, next) => userServiceProxy(req, res, next));
-app.get('/products', (req, res, next) => productsServiceProxy(req, res, next));
-app.get('/dog-api', (req, res, next) => dogServiceProxy(req, res, next));
+app.get('/users', (req, res) => userServiceProxy(req, res));
+app.get('/products', (req, res) => productsServiceProxy(req, res));
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`Rodando na porta ${port}!`));

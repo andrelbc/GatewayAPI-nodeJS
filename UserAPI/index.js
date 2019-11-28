@@ -2,11 +2,10 @@ const app = require('express')();
 
 app.get('/users', function(req, res){
 
-    // We want to set the content-type header so that the browser understands
-  //  the content of the response.
+    // Informando para o navegador o tipo de resposta
   res.contentType('application/json');
 
-  // Normally, the data is fetched from a database, but we can cheat:
+  // dados no formato json
   var users = [
     { name: 'David', id: '1' },
     { name: 'André', id: '2' },
@@ -18,13 +17,10 @@ app.get('/users', function(req, res){
     { name: 'Krappa', id: '8' }
   ];
 
-  // Since the request is for a JSON representation of the people, we
-  //  should JSON serialize them. The built-in JSON.stringify() function
-  //  does that.
+  // A função JSON.stringfy() serializa os nossos dados
   var usersJSON = JSON.stringify(users);
 
-  // Now, we can use the response object's send method to push that string
-  //  of people JSON back to the browser in response to this request:
+  // O método send envia a string com os dados para o navegador como resposta 
   res.send(usersJSON);
 });
 
